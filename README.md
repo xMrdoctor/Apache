@@ -47,7 +47,7 @@ A modern, professional, and beautifully designed file manager for XAMPP environm
 Clone this repository or download the files individually:
 
 ```bash
-git clone https://github.com/yourusername/xfile-manager.git
+git clone https://github.com/xMrDoctor/Apache.git
 cd xfile-manager
 ```
 
