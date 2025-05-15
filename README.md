@@ -7,7 +7,7 @@
 A modern, professional, and beautifully designed file manager for XAMPP environments. This file manager replaces the default Apache directory listing with a sleek, responsive interface that delivers a superior local development experience.
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x450.png?text=XFile+Manager+Screenshot" alt="XFile Manager Screenshot">
+  <img src="img/xfile-manager-screenshot.png" alt="XFile Manager Screenshot">
 </p>
 
 ## ✨ Features
@@ -35,7 +35,9 @@ A modern, professional, and beautifully designed file manager for XAMPP environm
 
 2. Copy all three files to any directory in your XAMPP installation where you want the file manager to be available.
 
-3. Access the directory through your browser:
+3. Ensure your XAMPP server is running (Apache service must be active).
+
+4. Access the directory through your browser:
    ```
    http://localhost/your-directory/
    ```
@@ -59,13 +61,29 @@ Copy the three files to any directory where you want the file manager:
 cp index.php .htaccess xfile_manager.php /path/to/xampp/htdocs/your-directory/
 ```
 
-#### 3. Navigate to the Directory
+#### 3. Configure XAMPP
+
+Make sure your XAMPP environment is properly configured:
+
+1. Start the XAMPP Control Panel
+2. Start the Apache service
+3. Ensure PHP is enabled (PHP module should be active in Apache)
+
+#### 4. Navigate to the Directory
 
 Open your browser and navigate to:
 
 ```
 http://localhost/your-directory/
 ```
+
+#### 5. Troubleshooting
+
+If you encounter any issues:
+- Check that Apache is running properly
+- Verify that .htaccess files are enabled in your Apache configuration
+- Ensure PHP is properly configured in XAMPP
+- Check file permissions (files should be readable by the web server)
 
 ## 🎮 Usage Guide
 
@@ -87,8 +105,8 @@ XFile Manager offers two view modes that you can switch between:
    - To activate: Click the list icon in the toolbar
 
 <p align="center">
-  <img src="https://via.placeholder.com/400x250.png?text=Grid+View" alt="Grid View">
-  <img src="https://via.placeholder.com/400x250.png?text=List+View" alt="List View">
+  <img src="img/grid-view.png" alt="Grid View" width="400">
+  <img src="img/list-view.png" alt="List View" width="400">
 </p>
 
 ### File Types and Icons
@@ -118,32 +136,48 @@ XFile Manager is designed to work out of the box, but you can customize its beha
 
 ```php
 $config = [
-    'hide_files' => ['.', '..', '.htaccess', '.git', '.gitignore'],
+    // Files and directories to hide from the listing
+    'hide_files' => ['.', '..', '.htaccess', '.git', '.gitignore', '.DS_Store', 'Thumbs.db'],
+    
+    // File extensions to hide (e.g., ['tmp', 'log'])
     'ignored_extensions' => [],
+    
+    // Date format for file modified dates (using PHP's date function)
     'date_format' => 'M d, Y h:i A',
+    
+    // Theme colors for the UI
     'theme' => [
-        'primary_color' => '#00509a',
-        'secondary_color' => '#484A72',
-        'text_color' => '#333333',
-        'background_color' => '#f8f9fa',
-        'card_background' => '#ffffff'
+        'primary_color' => '#00509a',      // Main accent color
+        'secondary_color' => '#484A72',    // Secondary color
+        'text_color' => '#333333',         // Main text color
+        'background_color' => '#f8f9fa',   // Page background
+        'card_background' => '#ffffff'     // Card/item background
     ],
+    
+    // Default view mode (grid or list)
     'view_mode' => isset($_GET['view']) ? $_GET['view'] : 'grid',
+    
+    // Files that should be considered index files
     'index_files' => ['index.php', 'index.html', 'index.htm']
 ];
 ```
 
-### Configuration Options Explained
+### Adjusting the Configuration
 
-| Option | Description |
-|--------|-------------|
-| `hide_files` | Files and folders to hide from the display |
-| `ignored_extensions` | File extensions to hide from the display |
-| `date_format` | Format for displaying dates (using PHP's date function) |
-| `theme.primary_color` | Main accent color for the interface |
-| `theme.secondary_color` | Secondary color for certain UI elements |
-| `view_mode` | Default view mode (grid or list) |
-| `index_files` | Files that should be considered as index files |
+To modify the configuration:
+
+1. Open `index.php` in a text editor
+2. Locate the `$config` array at the top of the file
+3. Edit the values as needed
+4. Save the file and refresh your browser
+
+### Advanced Configuration
+
+For advanced users, you can also modify:
+
+- The `.htaccess` file to change how Apache handles directory requests
+- The CSS styles within `index.php` to customize the appearance further
+- The PHP code to add new features or modify existing functionality
 
 ## 🧩 How It Works
 
